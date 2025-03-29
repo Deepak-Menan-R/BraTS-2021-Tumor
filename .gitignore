@@ -1,0 +1,22 @@
+# Ignore log files
+logs/
+*.log
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+
+# Ignore compiled files
+*.pyc
+*.o
+*.exe
+
+# Ignore virtual environment
+venv/
+.env
+
+# Ignore dataset files
+data/
+*.nii.gz

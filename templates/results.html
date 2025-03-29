@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Segmentation Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1000px; margin: 0 auto; padding: 20px; }
+        .results-container { display: flex; justify-content: space-between; margin: 30px 0; }
+        .image-box { width: 48%; text-align: center; }
+        .image-box img { max-width: 100%; border: 1px solid #ddd; }
+        .download-btn { 
+            display: inline-block; 
+            background: #2196F3; 
+            color: white; 
+            padding: 10px 20px; 
+            margin: 10px 5px; 
+            text-decoration: none; 
+            border-radius: 4px; 
+        }
+        .download-btn:hover { background: #0b7dda; }
+        .clinical-results { margin-top: 30px; padding: 20px; border-top: 2px solid #ddd; }
+        .log-output { background: #f4f4f4; padding: 10px; white-space: pre-wrap; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Segmentation Results</h1>
+    
+    <div class="results-container">
+        <div class="image-box">
+            <h2>Input MRI</h2>
+            <img src="data:image/png;base64,{{ input_preview }}" alt="Input MRI">
+            <div>
+                <a href="/download/input.nii.gz" class="download-btn">Download Input</a>
+            </div>
+        </div>
+        
+        <div class="image-box">
+            <h2>Segmentation Output</h2>
+            <img src="data:image/png;base64,{{ output_preview }}" alt="Segmentation Output">
+            <div>
+                <a href="/download/output.nii.gz" class="download-btn">Download Output</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="clinical-results">
+        <h2>Clinical Analysis</h2>
+        <h3>Tumor Volume Analysis</h3>
+        <ul>
+            {% for key, value in results.items() %}
+                <li><strong>{{ key }}</strong>: {{ value }}</li>
+            {% endfor %}
+        </ul>
+        
+        <h3>Validation Metrics</h3>
+        <ul>
+            {% for key, value in clinical_validation.items() %}
+                <li><strong>{{ key }}</strong>: {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="/" style="text-decoration: none; color: #2196F3;">← Process another MRI</a>
+    </div>
+</body>
+</html>

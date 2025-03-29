@@ -1,0 +1,10 @@
+flask
+torch
+monai
+nibabel
+numpy
+matplotlib
+gunicorn
+python-dotenv
+opencv-python
+scipy

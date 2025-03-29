@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Brain MRI Segmentation</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .upload-box { border: 2px dashed #ccc; padding: 20px; text-align: center; margin: 20px 0; }
+        .btn { background: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        .btn:hover { background: #45a049; }
+        .file-list { margin: 10px 0; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>Multi-modal Brain MRI Segmentation</h1>
+    <p>Upload 4 NIfTI files (one for each modality: T1, T2, FLAIR, etc.)</p>
+    
+    <form method="post" action="/upload" enctype="multipart/form-data" id="uploadForm">
+        <div class="upload-box">
+            <input type="file" name="files" multiple accept=".nii,.nii.gz" required>
+            <p>Select all 4 modality files at once, or drag and drop</p>
+            <div class="file-list" id="fileList">No files selected</div>
+        </div>
+        <button type="submit" class="btn">Process MRI</button>
+    </form>
+
+    <script>
+        document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+            const fileList = document.getElementById('fileList');
+            if (this.files.length > 0) {
+                fileList.innerHTML = '';
+                for (let i = 0; i < this.files.length; i++) {
+                    fileList.innerHTML += `<div>Modality ${i+1}: ${this.files[i].name}</div>`;
+                }
+            } else {
+                fileList.innerHTML = 'No files selected';
+            }
+        });
+    </script>
+</body>
+</html>
